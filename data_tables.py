@@ -99,5 +99,4 @@ def get_GDP_PPP():
 
 
     df = pd.DataFrame(data=all_rows,columns=headings)
-    df = df.sort_values(by="Country/Territory", ascending = True)
     return df
