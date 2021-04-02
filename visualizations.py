@@ -5,6 +5,36 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def graph_medals(table1):
+    # convert pandas object into lists
+    medals_for_all = [table1.columns.values.tolist()] + table1.values.tolist();
+    
+    countries =[]
+    medals =[]
+
+    for row in medals_for_all[1:]:
+        country = row[0]
+        countries.append(country)
+        medal = int(row[15])
+        medals.append(medal)
+
+    plt.bar(countries, medals)
+    plt.show()
+    
+
+
+    
+    
+
+
+
+
+    
+
+    
+
+
+
+
     
 
 def plot_GDPvMedals(table1, table2):
