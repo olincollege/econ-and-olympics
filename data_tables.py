@@ -77,10 +77,10 @@ def get_GDP_PPP():
     soup = BeautifulSoup(page.content, 'html.parser')
     target_data = soup.find(id="mw-content-text")
     tables = target_data.find_all(class_ = "wikitable sortable")
-    unranked_medals = tables[1]
+    ranked_GDP = tables[1]
 
     # the head will form our column names
-    rows = unranked_medals.find_all("tr")
+    rows = ranked_GDP.find_all("tr")
     # Head values (Column names) are the first items of the body list
     head_row = rows[0]; # 0th item is the header row
     body_rows = rows[1:]; # All other items becomes the rest of the rows
@@ -100,3 +100,32 @@ def get_GDP_PPP():
 
     df = pd.DataFrame(data=all_rows,columns=headings)
     return df
+
+def get_IHDI():
+    page = requests.get("https://en.wikipedia.org/wiki/List_of_countries_by_inequality-adjusted_HDI")
+    soup = BeautifulSoup(page.content, 'html.parser')
+    target_data = soup.find(id="mw-content-text")
+    ranked_HDI = target_data.find(class_ = "wikitable sortable")
+
+    # the head will form our column names
+    rows = ranked_HDI.find_all("tr")
+    # Head values (Column names) are the first items of the body list
+    head_rows = rows[0:2]; # 0th item is the header row
+    body_rows = rows[2:]; # All other items becomes the rest of the rows
+    print(body_rows)
+
+
+    headings = ["Rank", "Country", "IHDI", "HDI", "Overall loss (%)", "Growth since 2010"]
+
+
+    all_rows = []
+    for row_num in range(len(body_rows)): # A row at a time
+        row = [] # this will old entries for one row
+        for row_item in body_rows[row_num].find_all("td"): #loop through all row entries
+            aa = re.sub("(\xa0)|(\n)|,","",row_item.text)
+            row.append(aa)
+        all_rows.append(row)
+
+
+    #df = pd.DataFrame(data=all_rows,columns=headings)
+    #return df

@@ -4,9 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-def graph_medals(table1):
+def graph_medals(table):
     # convert pandas object into lists
-    medals_for_all = [table1.columns.values.tolist()] + table1.values.tolist();
+    medals_for_all = [table.columns.values.tolist()] + table.values.tolist();
     
     countries =[]
     medals =[]
@@ -16,27 +16,22 @@ def graph_medals(table1):
         countries.append(country)
         medal = int(row[15])
         medals.append(medal)
-
-    plt.bar(countries, medals)
+    
+    sorted_medals = sorted(medals, reverse = True)
+    
+    new_countries = []
+    for medal in sorted_medals:
+        for row in medals_for_all[1:]:
+            if int(row[15]) == medal:
+                new_countries.append(row[0])
+                medals_for_all.remove(row)
+                break
+                
+    plt.figure(figsize=(15, 9))
+    plt.bar(new_countries[0:31], sorted_medals[0:31])
     plt.show()
     
-
-
     
-    
-
-
-
-
-    
-
-    
-
-
-
-
-    
-
 def plot_GDPvMedals(table1, table2):
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
