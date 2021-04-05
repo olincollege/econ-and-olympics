@@ -5,28 +5,35 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def graph_medals(table):
     # convert pandas object into lists
     medals_for_all = [table.columns.values.tolist()] + table.values.tolist();
     
-    countries =[]
+    countries = []
     medals =[]
 
-    for row in medals_for_all[1:]:
+    for row in medals_for_all[1:(len(medals_for_all)-1)]:
         country = row[0]
         countries.append(country)
         medal = int(row[15])
         medals.append(medal)
     
-    sorted_medals = sorted(medals, reverse = True)
+    pairs = []
+    i = 0
+    for i in range(len(countries)):
+        pairs.append([countries[i], medals[i]])
+    
+    def takeMedal(pair):
+        return pair[1]
+    
+    pairs.sort(key = takeMedal, reverse = True)
     
     new_countries = []
-    for medal in sorted_medals:
-        for row in medals_for_all[1:]:
-            if int(row[15]) == medal:
-                new_countries.append(row[0])
-                medals_for_all.remove(row)
-                break
+    sorted_medals = []
+    for pair in pairs:
+        new_countries.append(pair[0])
+        sorted_medals.append(pair[1])
     
     # Figure Size
     fig, ax = plt.subplots(figsize =(16, 9))
@@ -65,10 +72,6 @@ def graph_medals(table):
     ax.set_title('Distribution of Olympic Medals by Country',
                  loc ='left', fontweight ='bold', fontsize = 20)
 
-    # Add Text watermark
-    fig.text(0.9, 0.15, 'Jeeteshgavande30', fontsize = 12,
-             color ='grey', ha ='right', va ='bottom',
-             alpha = 0.7)
     plt.xlabel('Total Medals Won', fontweight ='bold', fontsize = 15)
     plt.ylabel('Countries', fontweight ='bold', fontsize = 15)
     plt.show()
@@ -180,7 +183,7 @@ def plot_Gold_MedalsvGDP(table1, table2):
 
     plt.scatter(xpoints, ypoints)
 
-    plt.title("2019 GDP(PPP) vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.title("2019 GDP(PPP) vs. Gold Medals", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
 
@@ -221,7 +224,7 @@ def plot_Gold_MedalsvGDP_noOutliers(table1, table2):
 
     plt.scatter(xpoints, ypoints)
 
-    plt.title("2019 GDP(PPP) vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.title("2019 GDP(PPP) vs. Gold Medals", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
 
