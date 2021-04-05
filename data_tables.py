@@ -138,6 +138,7 @@ def get_GDP_per_Capita():
     return df
 
 
+
 def get_IHDIs():
     page = requests.get("https://en.wikipedia.org/wiki/List_of_countries_by_inequality-adjusted_HDI")
     soup = BeautifulSoup(page.content, 'html.parser')

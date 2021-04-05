@@ -27,9 +27,50 @@ def graph_medals(table):
                 new_countries.append(row[0])
                 medals_for_all.remove(row)
                 break
-                
-    plt.figure(figsize=(15, 9))
-    plt.bar(new_countries[0:31], sorted_medals[0:31])
+    
+    # Figure Size
+    fig, ax = plt.subplots(figsize =(16, 9))
+
+    # Horizontal Bar Plot
+    ax.barh(new_countries[0:31], sorted_medals[0:31])
+
+    # Remove axes splines
+    for s in ['top', 'bottom', 'left', 'right']:
+        ax.spines[s].set_visible(False)
+
+    # Remove x, y Ticks
+    ax.xaxis.set_ticks_position('none')
+    ax.yaxis.set_ticks_position('none')
+
+    # Add padding between axes and labels
+    ax.xaxis.set_tick_params(pad = 5)
+    ax.yaxis.set_tick_params(pad = 10)
+
+    # Add x, y gridlines
+    ax.grid(b = True, color ='grey',
+            linestyle ='-.', linewidth = 0.5,
+            alpha = 0.2)
+
+    # Show top values
+    ax.invert_yaxis()
+
+    # Add annotation to bars
+    for i in ax.patches:
+        plt.text(i.get_width()+0.2, i.get_y()+0.5,
+                 str(round((i.get_width()), 2)),
+                 fontsize = 10, fontweight ='bold',
+                 color ='grey')
+
+    # Add Plot Title
+    ax.set_title('Distribution of Olympic Medals by Country',
+                 loc ='left', fontweight ='bold', fontsize = 20)
+
+    # Add Text watermark
+    fig.text(0.9, 0.15, 'Jeeteshgavande30', fontsize = 12,
+             color ='grey', ha ='right', va ='bottom',
+             alpha = 0.7)
+    plt.xlabel('Total Medals Won', fontweight ='bold', fontsize = 15)
+    plt.ylabel('Countries', fontweight ='bold', fontsize = 15)
     plt.show()
     
     
@@ -60,9 +101,9 @@ def plot_MedalsvGDP(table1, table2):
     
     plt.scatter(xpoints, ypoints)
     
-    plt.title("2019 GDP(PPP) vs. Medals")
-    plt.xlabel("2019 GDP(PPP)(in billions)")
-    plt.ylabel("Totals Medals Won")
+    plt.title("2019 GDP(PPP) vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -101,9 +142,9 @@ def plot_MedalsvGDP_noOutliers(table1, table2):
     
     plt.scatter(xpoints, ypoints)
     
-    plt.title("2019 GDP(PPP) vs. Medals")
-    plt.xlabel("2019 GDP(PPP)(in billions)")
-    plt.ylabel("Totals Medals Won")
+    plt.title("2019 GDP(PPP) vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -139,9 +180,9 @@ def plot_Gold_MedalsvGDP(table1, table2):
 
     plt.scatter(xpoints, ypoints)
 
-    plt.title("2019 GDP(PPP) vs. Medals")
-    plt.xlabel("2019 GDP(PPP)(in billions)")
-    plt.ylabel("Total Gold Medals Won")
+    plt.title("2019 GDP(PPP) vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -180,9 +221,9 @@ def plot_Gold_MedalsvGDP_noOutliers(table1, table2):
 
     plt.scatter(xpoints, ypoints)
 
-    plt.title("2019 GDP(PPP) vs. Medals")
-    plt.xlabel("2019 GDP(PPP)(in billions)")
-    plt.ylabel("Total Gold Medals Won")
+    plt.title("2019 GDP(PPP) vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -217,9 +258,9 @@ def plot_MedalsvGDP_per_Capita(table1, table2):
     
     plt.scatter(xpoints, ypoints)
     
-    plt.title("2019 GDP per Capita vs. Medals")
-    plt.xlabel("2019 GDP per Capita(")
-    plt.ylabel("Totals Medals Won")
+    plt.title("2019 GDP per Capita vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 GDP per Capita", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -264,9 +305,9 @@ def plot_MedalsvGDP_per_Capita_noOutliers(table1, table2):
 
     plt.scatter(xpoints, ypoints)
     
-    plt.title("2019 GDP per Capita vs. Medals")
-    plt.xlabel("2019 GDP per Capita(")
-    plt.ylabel("Totals Medals Won")
+    plt.title("2019 GDP per Capita vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 GDP per Capita", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -299,9 +340,9 @@ def plot_MedalsvIHDI(table1, table2):
 
     plt.scatter(xpoints, ypoints)
 
-    plt.title("2019 IHDI vs. Medals")
-    plt.xlabel("2019 IHDI")
-    plt.ylabel("Totals Medals Won")
+    plt.title("2019 IHDI vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 IHDI", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
@@ -345,14 +386,10 @@ def plot_MedalsvIHDI_noOutliers(table1, table2):
 
     plt.scatter(xpoints, ypoints)
 
-    plt.title("2019 IHDI vs. Medals")
-    plt.xlabel("2019 IHDI")
-    plt.ylabel("Totals Medals Won")
+    plt.title("2019 IHDI vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.xlabel("2019 IHDI", fontweight ='bold', fontsize = 15)
+    plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
     plt.show()
     
     return [x_points, y_points]
-
-
-
-
