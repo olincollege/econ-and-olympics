@@ -108,32 +108,40 @@ def plot_MedalsvGDP(table1, table2):
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
     GDPs = [table2.columns.values.tolist()] + table2.values.tolist();
     
+    #creates list that holds two variables
     new_medals = []
     new_GDPs = []
+    
+    #To pull the GDPs of the medals table-more GDPs than countries with medals
     for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
-                
+   # puts row 2 from GDPS into points for the x_axis             
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
         
+    #puts row 15 from Medals into points for the y_axis  
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-            
+        
+    #??????????????????        
     x_points = [x_point / 1000 for x_point in x_points]
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     
+    #puts the new points into a scatter plot
     plt.scatter(xpoints, ypoints)
     
+    #Gives the labels and title of 
     plt.title("Correlation between a Country’s GDP (PPP) and Total Medals Won", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
+    #display plot
     plt.show()
     
     return [x_points, y_points]
@@ -156,33 +164,36 @@ def plot_MedalsvGDP_noOutliers(table1, table2):
     #remove outliers, which happened to be the top 3 ranking nations in GDP
     GDPs = GDPs[4:]
     
+    #creates list that holds two variables
     new_medals = []
     new_GDPs = []
-    orig_x = []
-    for y in medals[1:]:
+    
+    #To pull the GDPs of the medals list
+for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
-                orig_x.append(x)            
+    #puts row 2 of new_GDPs into points for the x_axis                       
     x_points = []
-    for row in new_GDPs:
+    for row in new_GDPMarkdowns:
         x_points.append(int(row[2]))
-        
+    #puts row 15 of new_Medals into points for the y_axis    
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-        
+    #????????????????????    
     x_points = [x_point / 1000 for x_point in x_points]
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     
+    #To put new points into a scatter plot
     plt.scatter(xpoints, ypoints)
-    
+    #Puts labels on the axis' and the title
     plt.title("Correlation between a Country’s GDP (PPP) and Total Medals Won (No Outliers)", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
-
+    #displays the graph
     plt.show()
     
     return [x_points, y_points]
@@ -201,35 +212,38 @@ def plot_Gold_MedalsvGDP(table1, table2):
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
     GDPs = [table2.columns.values.tolist()] + table2.values.tolist();
-
+    
+    #puts lists into the two variables
     new_medals = []
     new_GDPs = []
     orig_x = []
+    
+    #Pulls the GPDs of the medals list 
     for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
                 orig_x.append(x)
-
+    #puts row 2 of GDPS into points for the x_axis
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
-
+    #put row 15 of medals into points for the y_axis
     y_points = []
     for row in new_medals:
         y_points.append(int(row[12]))
-
+    #??????????????????????????????????
     x_points = [x_point / 1000 for x_point in x_points]
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
-
+    #Put both points into a scatter plot
     plt.scatter(xpoints, ypoints)
-
+    #Gives labels for both axis' and gives the plot a title
     plt.title("Correlation between a Country’s GDP (PPP) and Total Gold Medals Won", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
-
+    #display plot
     plt.show()
     
     return [x_points, y_points]
@@ -252,34 +266,36 @@ def plot_Gold_MedalsvGDP_noOutliers(table1, table2):
     #remove outliers, which happened to be the top 3 ranking nations in GDP
     GDPs = GDPs[4:]
 
+    #puts the lists into the two variables
     new_medals = []
     new_GDPs = []
     orig_x = []
+    #pulls GDPs of the medals list
     for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
                 orig_x.append(x)
-
+    #puts row 2 of GDPS into points for the x_axis
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
-
+    #put row 15 of medals into points for the y_axis
     y_points = []
     for row in new_medals:
         y_points.append(int(row[12]))
-
+    #?????????????????????????
     x_points = [x_point / 1000 for x_point in x_points]
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
-
+    #places both points into a scatter plot
     plt.scatter(xpoints, ypoints)
-
+    #Gives labels to both axis' and titles the plot
     plt.title("Correlation between a Country’s GDP (PPP) and Total Gold Medals Won (No Outliers)", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
-
+    #display the plot
     plt.show()
     
     return [x_points, y_points]
@@ -298,34 +314,36 @@ def plot_MedalsvGDP_per_Capita(table1, table2):
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
     GDPs = [table2.columns.values.tolist()] + table2.values.tolist();
-        
+    # creates the lists that will hold the two variables   
     new_medals = []
     new_GDPs = []
     orig_x = []
+    # pulls the GPDs of the medals list
     for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
                 orig_x.append(x)
-                
+    # puts row 2 of new_GDPS into points for the x_axis            
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
-        
+    #puts row 15 of new_Medals into points for the y_axis    
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-            
+    #???????????????????????????????????????        
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
-    
+    #puts points into a scatter plot
     plt.scatter(xpoints, ypoints)
     
+    #Gives labels to both axis and gives the graph a title
     plt.title("Correlation Between a Country’s 2019 GDP (PPP) per Capita and Total Medals Won", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP per Capita", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
-
+    #display the scatter plot
     plt.show()
     
     return [x_points, y_points]
@@ -344,10 +362,11 @@ def plot_MedalsvGDP_per_Capita_noOutliers(table1, table2):
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
     GDPs = [table2.columns.values.tolist()] + table2.values.tolist();
-        
+    # creates the lists that will hold the two variables   
     new_medals = []
     new_GDPs = []
     orig_x = []
+    #pulls GDPs of the medals list
     for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
@@ -363,25 +382,26 @@ def plot_MedalsvGDP_per_Capita_noOutliers(table1, table2):
             new_medals.remove(row)
             new_GDPs.remove(new_GDPs[i])
             break
-                
+    # puts row 2 of new_GDPS into points for the x_axis             
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
-        
+     #puts row 15 of new_Medals into points for the y_axis   
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-           
+    #????????????????????????????????       
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     
-
+    #puts points into a scatter plot
     plt.scatter(xpoints, ypoints)
-    
+    #Gives labels to both axis and gives the graph a title
     plt.title("2019 GDP per Capita vs. Medals", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP per Capita", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
-
+    
+    #displays plot
     plt.show()
     
     return [x_points, y_points]
@@ -400,32 +420,34 @@ def plot_MedalsvIHDI(table1, table2):
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist(); # y
     IHDIs = [table2.columns.values.tolist()] + table2.values.tolist(); # x
-
+    # creates the lists that will hold the two variables
     new_medals = []
     new_IHDIs = []
+    #pulls IHDI of the medals list
     for y in medals[1:]:
         for x in IHDIs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_IHDIs.append(x)
-    
+    #puts row 2 of IHDI into the points for x_axis
     x_points = []
     for row in new_IHDIs:
         x_points.append(Decimal(row[2]))
-
+    #puts row 15 of Medals into the points for y_axis
     y_points = []
     for row in new_medals:
         y_points.append(Decimal(row[15]))
-
+    #?????????????????????????????????
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
-
+    #puts points into a scatter plot
     plt.scatter(xpoints, ypoints)
-
+    #Gives labels to both axis and gives the graph a title
     plt.title("2019 IHDI vs. Medals", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 IHDI", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
+    #displays plot
     plt.show()
     
     return [x_points, y_points]
@@ -444,10 +466,12 @@ def plot_MedalsvIHDI_noOutliers(table1, table2):
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist(); # y
     IHDIs = [table2.columns.values.tolist()] + table2.values.tolist(); # x
-
+    
+    # creates the lists that will hold the two variables
     new_medals = []
     new_IHDIs = []
     orig_x = []
+    #pulls IHDI of the medals list
     for y in medals[1:]:
         for x in IHDIs[1:]:
             if x[1] in y[0]:
@@ -463,24 +487,25 @@ def plot_MedalsvIHDI_noOutliers(table1, table2):
             new_medals.remove(row)
             new_IHDIs.remove(new_IHDIs[i])
             break
-                
+    #puts row 2 of IHDI into the points for x_axis            
     x_points = []
     for row in new_IHDIs:
         x_points.append(Decimal(row[2]))
-
+    #puts row 15 of Medals into the points for y_axis
     y_points = []
     for row in new_medals:
         y_points.append(Decimal(row[15]))
-
+    #???????????????????????????
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
-
+    #puts points into scatter plot
     plt.scatter(xpoints, ypoints)
-
+    #Gives labels to both axis and gives the graph a title
     plt.title("2019 IHDI vs. Medals", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 IHDI", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
+    #display plot
     plt.show()
     
     return [x_points, y_points]

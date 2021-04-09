@@ -1,6 +1,6 @@
 from scipy.stats import spearmanr
 
-
+#This is ti find the correllation coefficent using the spearman equation of all the graphs
 def find_Spearman_coefficient(data1, data2):
     """
     Short summary.
