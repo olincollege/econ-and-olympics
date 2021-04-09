@@ -2,6 +2,15 @@ from scipy.stats import spearmanr
 
 
 def find_Spearman_coefficient(data1, data2):
+    """
+    Short summary.
+
+    Args:
+        variable:
+
+    Returns:
+        Returns...
+    """
     coef, p = spearmanr(data1, data2)
     print('Spearmans correlation coefficient: %.3f' % coef)
     # interpret the significance
