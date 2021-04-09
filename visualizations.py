@@ -96,29 +96,39 @@ def graph_medals(table, num):
     
 def plot_MedalsvGDP(table1, table2):
     """
-    Displays a correlation plot between the 
+    Displays a correlation plot between the total distribution
+    of medals in Olympic History and the GDP of those countries
+    in 2019.
 
     Args:
-        variable:
-
+        table1: A .csv file that contains the distribution of
+                medals in all Olympic history
+        table2: A .csv file that contains the distribution of
+                the GDP of most countries(3 are exempt)
+                
     Returns:
-        Returns...
+        x_points: A list of integers that represents GDP (PPP)
+        y_points: A list of integers that represents total medals
+                  earned by country 
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
     GDPs = [table2.columns.values.tolist()] + table2.values.tolist();
     
-    #creates list that holds two variables
+    #creates lists that holds two variables
     new_medals = []
     new_GDPs = []
     
-    #To pull the GDPs of the medals table-more GDPs than countries with medals
+    # Matches the two tables by only adding the medal count
+    # of countries with known GDPs to the lists and then adding
+    # those countries' GDPs to a sepeare list at the same time
     for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
-   # puts row 2 from GDPS into points for the x_axis             
+    
+    # puts row 2 from GDPs into points for the x_axis             
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
@@ -128,8 +138,9 @@ def plot_MedalsvGDP(table1, table2):
     for row in new_medals:
         y_points.append(int(row[15]))
         
-    #??????????????????        
+    # lowers the digit count of the numbers in the GDP list      
     x_points = [x_point / 1000 for x_point in x_points]
+    # turns the coordinates into arrays
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     
@@ -149,13 +160,20 @@ def plot_MedalsvGDP(table1, table2):
     
 def plot_MedalsvGDP_noOutliers(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of medals in Olympic History and the GDP of those countries
+    in 2019, excluding 3 outliers.
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of
+                medals in all Olympic history
+        table2: A .csv file that contains the distribution of
+                the GDP of most countries(3 are exempt)
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of GDP
+        y_points: represents the list of integers of Medals earned
+                  by country 
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
@@ -169,21 +187,22 @@ def plot_MedalsvGDP_noOutliers(table1, table2):
     new_GDPs = []
     
     #To pull the GDPs of the medals list
-for y in medals[1:]:
+    for y in medals[1:]:
         for x in GDPs[1:]:
             if x[1] in y[0]:
                 new_medals.append(y)
                 new_GDPs.append(x)
     #puts row 2 of new_GDPs into points for the x_axis                       
     x_points = []
-    for row in new_GDPMarkdowns:
+    for row in new_GDPs:
         x_points.append(int(row[2]))
     #puts row 15 of new_Medals into points for the y_axis    
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-    #????????????????????    
+    # lowers the digit count of the numbers in the GDP list  
     x_points = [x_point / 1000 for x_point in x_points]
+    # turns the coordinates into arrays
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     
@@ -201,13 +220,20 @@ for y in medals[1:]:
 
 def plot_Gold_MedalsvGDP(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of gold medals in Olympic History and the GDP of those
+    countries in 2019.
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of
+                gold medals in all Olympic history
+        table2: A .csv file that contains the distribution of
+                the GDP of most countries(3 are exempt)
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of GDP
+        y_points: represents the list of integers of Gold
+                  Medals earned by country
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
@@ -233,14 +259,15 @@ def plot_Gold_MedalsvGDP(table1, table2):
     y_points = []
     for row in new_medals:
         y_points.append(int(row[12]))
-    #??????????????????????????????????
+    # lowers the digit count of the numbers in the GDP list  
     x_points = [x_point / 1000 for x_point in x_points]
+    # turns the coordinates into arrays
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     #Put both points into a scatter plot
     plt.scatter(xpoints, ypoints)
     #Gives labels for both axis' and gives the plot a title
-    plt.title("Correlation between a Country’s GDP (PPP) and Total Gold Medals Won", fontweight ='bold', fontsize = 20)
+    plt.title("Correlation between GDP (PPP) and Total Gold Medals Won", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
     #display plot
@@ -251,13 +278,20 @@ def plot_Gold_MedalsvGDP(table1, table2):
 
 def plot_Gold_MedalsvGDP_noOutliers(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of gold medals in Olympic History and the GDP of those
+    countries in 2019,excluding 3 outliers
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of
+                gold medals in all Olympic history
+        table2: A .csv file that contains the distribution of
+                the GDP of most countries(3 are exempt)
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of GDP
+        y_points: represents the list of integers of Gold Medals
+                  earned by country
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
@@ -285,14 +319,15 @@ def plot_Gold_MedalsvGDP_noOutliers(table1, table2):
     y_points = []
     for row in new_medals:
         y_points.append(int(row[12]))
-    #?????????????????????????
+    # lowers the digit count of the numbers in the GDP list  
     x_points = [x_point / 1000 for x_point in x_points]
+    # turns the coordinates into arrays
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     #places both points into a scatter plot
     plt.scatter(xpoints, ypoints)
     #Gives labels to both axis' and titles the plot
-    plt.title("Correlation between a Country’s GDP (PPP) and Total Gold Medals Won (No Outliers)", fontweight ='bold', fontsize = 20)
+    plt.title("Correlation between GDP (PPP) and Total Gold Medals Won (No Outliers)", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP(PPP)(in billions)", fontweight ='bold', fontsize = 15)
     plt.ylabel("Total Gold Medals Won", fontweight ='bold', fontsize = 15)
     #display the plot
@@ -303,13 +338,20 @@ def plot_Gold_MedalsvGDP_noOutliers(table1, table2):
     
 def plot_MedalsvGDP_per_Capita(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of medals in Olympic History and the GDP per capita of those
+    countries in 2019.
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of
+                medals in all Olympic history
+        table2: A .csv file that contains the distribution of
+                the GDP per capita of most countries (3 are exempt)
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of GDP per Capita
+        y_points: represents the list of integers of  Medals earned
+                  by country 
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
@@ -333,14 +375,14 @@ def plot_MedalsvGDP_per_Capita(table1, table2):
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-    #???????????????????????????????????????        
+    # turns the coordinates into arrays       
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     #puts points into a scatter plot
     plt.scatter(xpoints, ypoints)
     
     #Gives labels to both axis and gives the graph a title
-    plt.title("Correlation Between a Country’s 2019 GDP (PPP) per Capita and Total Medals Won", fontweight ='bold', fontsize = 20)
+    plt.title("Correlation Between 2019 GDP (PPP) per Capita and Total Medals Won", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP per Capita", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
     #display the scatter plot
@@ -351,13 +393,21 @@ def plot_MedalsvGDP_per_Capita(table1, table2):
 
 def plot_MedalsvGDP_per_Capita_noOutliers(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of medals in Olympic History and the GDP per capita of those
+    countries in 2019, excluding 1 outlier.
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of medals
+                in all Olympic history
+        table2: A .csv file that contains the distribution of the GDP
+                per capita of most countries(3 are exempt)
+
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of GDP per Capita
+        y_points: represents the list of integers of  Medals earned
+                  by country 
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist();
@@ -386,18 +436,18 @@ def plot_MedalsvGDP_per_Capita_noOutliers(table1, table2):
     x_points = []
     for row in new_GDPs:
         x_points.append(int(row[2]))
-     #puts row 15 of new_Medals into points for the y_axis   
+    #puts row 15 of new_Medals into points for the y_axis   
     y_points = []
     for row in new_medals:
         y_points.append(int(row[15]))
-    #????????????????????????????????       
+    # turns the coordinates into arrays      
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     
     #puts points into a scatter plot
     plt.scatter(xpoints, ypoints)
     #Gives labels to both axis and gives the graph a title
-    plt.title("2019 GDP per Capita vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.title("Correlation Between 2019 GDP(PPP) per Capita and Total Medals Won(No Outliers)", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 GDP per Capita", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
     
@@ -409,13 +459,20 @@ def plot_MedalsvGDP_per_Capita_noOutliers(table1, table2):
 
 def plot_MedalsvIHDI(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of medals in Olympic History and the IHDI of those countries
+    in 2019.
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of
+                medals in all Olympic history
+        table2: A .csv file that contains the distribution of
+                the IHDI of most countries(3 are exempt)
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of IHDI
+        y_points: represents the list of integers of Medals earned
+                  by country
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist(); # y
@@ -437,13 +494,13 @@ def plot_MedalsvIHDI(table1, table2):
     y_points = []
     for row in new_medals:
         y_points.append(Decimal(row[15]))
-    #?????????????????????????????????
+    # turns the coordinates into arrays
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     #puts points into a scatter plot
     plt.scatter(xpoints, ypoints)
     #Gives labels to both axis and gives the graph a title
-    plt.title("2019 IHDI vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.title("Correlation Between 2019 IHDI and Total Medals Won", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 IHDI", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
@@ -455,13 +512,21 @@ def plot_MedalsvIHDI(table1, table2):
 
 def plot_MedalsvIHDI_noOutliers(table1, table2):
     """
-    Short summary.
+    Displays a correlation plot between the total distribution
+    of medals in Olympic History and the IHDI of those countries
+    in 2019,except 1 outlier.
 
     Args:
-        variable:
+        table1: A .csv file that contains the distribution of medals
+                in all Olympic history
+        table2: A .csv file that contains the distribution of the
+                IHDI of most countries(3 are exempt)
 
     Returns:
-        Returns...
+        x_points: represents the list of integers of IHDI
+        y_points: represents the list of integers of Medals earned by
+                  country
+
     """
     # convert pandas object into lists
     medals = [table1.columns.values.tolist()] + table1.values.tolist(); # y
@@ -495,13 +560,13 @@ def plot_MedalsvIHDI_noOutliers(table1, table2):
     y_points = []
     for row in new_medals:
         y_points.append(Decimal(row[15]))
-    #???????????????????????????
+    # turns the coordinates into arrays
     xpoints = np.array(x_points)
     ypoints = np.array(y_points)
     #puts points into scatter plot
     plt.scatter(xpoints, ypoints)
     #Gives labels to both axis and gives the graph a title
-    plt.title("2019 IHDI vs. Medals", fontweight ='bold', fontsize = 20)
+    plt.title("Correlation Between 2019 IHDI and Total Medals Won (No Outliers)", fontweight ='bold', fontsize = 20)
     plt.xlabel("2019 IHDI", fontweight ='bold', fontsize = 15)
     plt.ylabel("Totals Medals Won", fontweight ='bold', fontsize = 15)
 
