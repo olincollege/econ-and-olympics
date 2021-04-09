@@ -27,10 +27,9 @@ def get_medals_all():
     # we know that table we want is the first one, so index = 0
     unranked_medals = tables[0]
 
-    # <tr> represents table rows, so we grab all the rows 
+    # <tr> represents table rows, so we grab all the rows
     rows = unranked_medals.find_all("tr")
-    
-    body_rows = rows[2:]; # All other items become the rest of the rows
+    body_rows = rows[2:] # All other items become the rest of the rows
 
     # create a list of the column names
     headings = ["Team (IOC code)", "SG Partcipated", "Gold", "Silver", "Bronze", "Total",
@@ -38,25 +37,24 @@ def get_medals_all():
                "Combined Total", "Gold", "Silver", "Bronze", "Total"]
 
 
-    # populate all_rows with the actual data within each
-    # line of html code that represents the body rows of the table
+    #populate all_rows with the actual data within each
+    #line of html code that represents the body rows of the table
     all_rows = []
     for row_num in range(len(body_rows)-1):
-        row = [] # a list that represents all the data within one row
+        row = [] #a list that represents all the data within one row
         for row_item in body_rows[row_num].find_all("td"): # loop through all cells in the row
             aa = re.sub("(\xa0)|(\n)|,","",row_item.text) # get the string (actual number) in that cell
-            row.append(aa) # add the cell data to the row list 
-        all_rows.append(row)# add the row list to the all_rows list
-        
-    # remove the bracketed letters that pop up next to country names
+            row.append(aa) # add the cell data to the row list
+            all_rows.append(row)# add the row list to the all_rows list
+    #remove the bracketed letters that pop up next to country names
     for row in all_rows:
         country = row[0]
         index = country.index(")")
         row[0] = country[0:index+1]
     print(all_rows)
     
-    # the bottom row is a table heading type (th) instead of a table
-    # data type (td) so it must be added seperately
+    #the bottom row is a table heading type (th) instead of a table
+    #data type (td) so it must be added seperately
     bottom_row = body_rows[len(body_rows)-1].find_all("th")
     row = []
     for row_item in bottom_row: # loop through all row entries
@@ -77,7 +75,7 @@ def get_GDP_PPP():
     Power Parity of all the countries in the world and puts
     that data into a Pandas Dataframe and then saves it to 
     a .csv file.
-
+    
     Args:
         This function has no arguments.
 
@@ -95,9 +93,9 @@ def get_GDP_PPP():
     # we know that table we want is the second one, so index = 1
     ranked_GDP = tables[1]
 
-    # <tr> represents table rows, so we grab all the rows 
+    #<tr> represents table rows, so we grab all the rows
     rows = ranked_GDP.find_all("tr")
-    body_rows = rows[1:]; # All other items become the rest of the rows
+    body_rows = rows[1:] #All other items become the rest of the rows
 
     # create a list of the column names
     headings = ["Rank", "Country/Territory", "GDP (in millions)"]
@@ -106,8 +104,8 @@ def get_GDP_PPP():
     # line of html code that represents the body rows of the table
     all_rows = []
     for row_num in range(len(body_rows)):
-        row = [] 
-        for row_item in body_rows[row_num].find_all("td"): # loop through all row entries
+        row = []
+        for row_item in body_rows[row_num].find_all("td"):#loop through all row entries
             aa = re.sub("(\xa0)|(\n)|,","",row_item.text)
             row.append(aa)
         all_rows.append(row) # add the row data to all_rows
@@ -145,7 +143,7 @@ def get_GDP_per_Capita():
     # we know that table we want is the second one, so index = 1
     ranked_GDP = tables[1]
 
-    # <tr> represents table rows, so we grab all the rows 
+    # <tr> represents table rows, so we grab all the rows
     rows = ranked_GDP.find_all("tr")
     body_rows = rows[1:]; # All other items becomes the rest of the rows
 
@@ -160,7 +158,7 @@ def get_GDP_per_Capita():
     orig_rows = []
     for row_num in range(len(body_rows)):
         row = [] 
-        for row_item in body_rows[row_num].find_all("td"): #loop through all row entries
+        for row_item in body_rows[row_num].find_all("td"):#loop through all row entries
             aa = re.sub("(\xa0)|(\n)|,","",row_item.text)
             row.append(aa)
         all_rows.append(row) # add the row data to all_rows
@@ -202,7 +200,7 @@ def get_IHDIs():
     rows = ranked_HDI.find_all("tr")
     body_rows = rows[3:]; # All other items becomes the rest of the rows
     
-    # create a list of the column names
+    #create a list of the column names
     headings = ["Rank", "Country", "IHDI", "HDI", "Overall loss (%)", "Growth since 2010"]
     
     # populate all_rows with the actual data within each
